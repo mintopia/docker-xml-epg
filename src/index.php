@@ -1,10 +1,10 @@
 <?php
-const EPG = getenv('EPG_URL');
+$epgUrl = getenv('EPG_URL');
 
 $cutoff = strtotime('-1 day');
 if (!file_exists('epg.xml') || (filemtime('epg.xml') < $cutoff)) {
 	$filename = tempnam(sys_get_temp_dir(), 'epg');
-	$gzippedFile = file_get_contents(EPG);
+	$gzippedFile = file_get_contents($epgUrl);
 	file_put_contents($filename, $gzippedFile);
 	ob_start();
 	readgzfile($filename);
